@@ -1,5 +1,3 @@
-## TO MODIFYYYY - IT'S JSUT A TEMPLATE - REMOVE THIS LINE AFTER!
-
 FROM python:3.10-slim-buster
 
 USER root

@@ -1,0 +1,2 @@
+## Method
+Dockerfile is not used here, since we are pushing directly the Postgres SQL Database directly into the EKS Cluster. So no Docker image of the database is used --> no containerization on database level.
