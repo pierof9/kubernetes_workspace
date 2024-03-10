@@ -1,2 +1,5 @@
-*.txt
+aws_naming_conventions.txt
+export_env.txt
+my-db-service-credentials.txt
+my-db-service-outcome.txt
 otherInfo.md
