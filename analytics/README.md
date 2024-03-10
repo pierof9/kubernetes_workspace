@@ -10,5 +10,7 @@
 
 CODEBUILD_BUILD_NUMBER this comes automatically from the CodeBuild process. You don't have to define it.
 
+4. Create the policy "FullECRAccess" with the json provided in ECR_policy_config.json, and attach it to the role that is managing the CodeBuild job.
+
 ### Application deployment with kubectl
 ...
