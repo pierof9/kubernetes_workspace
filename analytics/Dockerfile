@@ -1,4 +1,4 @@
-FROM python:3.10-slim-buster
+FROM python:3.10
 
 USER root
 
@@ -16,4 +16,4 @@ COPY . .
 
 RUN chmod +x analytics/app.py
 
-CMD python analytics/app.py
+ENTRYPOINT python analytics/app.py
