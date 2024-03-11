@@ -14,4 +14,6 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD python app.py
+RUN chmod +x analytics/app.py
+
+CMD python analytics/app.py

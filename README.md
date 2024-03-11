@@ -1,4 +1,5 @@
 # Coworking Space Service Extension
+This is a project developed from the Udacity Course on Cloud DevOps Engineer
 The Coworking Space Service is a set of APIs that enables users to request one-time tokens and administrators to authorize access to a coworking space. This service follows a microservice pattern and the APIs are split into distinct services that can be deployed and managed independently of one another.
 
 For this project, you are a DevOps engineer who will be collaborating with a team that is building an API for business analysts. The API provides business analysts basic analytics data on user activity in the service. The application they provide you functions as expected locally and you are expected to help build a pipeline to deploy it in Kubernetes.
@@ -17,11 +18,11 @@ For this project, you are a DevOps engineer who will be collaborating with a tea
 #### Create an EKS Cluster
 1. check IAM Permissions: `aws sts get-caller-identity`
 2. check if the user has the policies to create and manage a cluster: `aws iam list-attached-user-policies --user-name <userName>`
-3. create the cluster: `eksctl create cluster --name <clusterName> --version 1.29 --region <region> --nodegroup-name <nodesName> --node-type t3.small --nodes 1 --nodes-min 1 --nodes-max 2`
+3. create the cluster: `eksctl create cluster --name ${AWS_CLUSTER_NAME} --version 1.29 --region ${AWS_REGION} --nodegroup-name ${AWS_NODES_NAME} --node-type t3.small --nodes 1 --nodes-min 1 --nodes-max 2`
 4. Configure your cluster:
-- `aws eks --region <region> update-kubeconfig --name <clusterName>`
+- `aws eks --region ${AWS_REGION} update-kubeconfig --name ${AWS_CLUSTER_NAME}`
 - this is for inspection: `kubectl config view`
-5. To delete the cluster: `eksctl delete cluster --name <clusterName> --region <region>`
+5. To delete the cluster: `eksctl delete cluster --name ${AWS_CLUSTER_NAME} --region ${AWS_REGION}`
 6. To check if you are correctly connected to the cluster: `kubectl get namespace`
 7. Check the storage class of the cluster: `kubectl get storageClass`. This will be used later for the volume.
 
@@ -46,14 +47,15 @@ Now you need to populate the database. You will use the PORT FORWARDING method f
 8. launch `kubectl port-forward --namespace <NAMESPACE> svc/<SERVICENAME> 5432:5432 &` to keep the connection open:
 9. launch:
 - `EXPORT PGPASSWORD=...`
-- `PGPASSWORD=$PGPASSWORD psql --host 127.0.0.1 -U <DBUSER> -d <DBNAME> -p 5432 < 1_create_tables.sql`
-- `PGPASSWORD=$PGPASSWORD psql --host 127.0.0.1 -U <DBUSER> -d <DBNAME> -p 5432 < 2_seed_users.sql`
-- `PGPASSWORD=$PGPASSWORD psql --host 127.0.0.1 -U <DBUSER> -d <DBNAME> -p 5432 < 3_seed_tokens.sql`
+- `PGPASSWORD=${PGPASSWORD} psql --host ${DB_HOST} -U ${DB_USERNAME} -d ${DB_NAME} -p 5432 < 1_create_tables.sql`
+- `PGPASSWORD=${PGPASSWORD} psql --host ${DB_HOST} -U ${DB_USERNAME} -d ${DB_NAME} -p 5432 < 2_seed_users.sql`
+- `PGPASSWORD=${PGPASSWORD} psql --host ${DB_HOST} -U ${DB_USERNAME} -d ${DB_NAME} -p 5432 < 3_seed_tokens.sql`
+
 
 you can verify if the tables are there via `\dt` command, or the schemas via `\l` command.
 
 If you want to log into the database, at this point, you have to use:
-`psql -h localhost -p 5432 -U <DBUSER> -d <DBNAME>`
+`psql -h localhost -p 5432 -U ${DB_USERNAME} -d ${DB_NAME}`
 
 10. Close the port-forwarding once you don't need it anymore:
 `ps aux | grep 'kubectl port-forward' | grep -v grep | awk '{print $2}' | xargs -r kill`
