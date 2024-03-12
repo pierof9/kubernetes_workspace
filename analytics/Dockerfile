@@ -16,4 +16,4 @@ COPY . .
 
 RUN chmod +x analytics/app.py
 
-ENTRYPOINT python analytics/app.py
+CMD python analytics/app.py
