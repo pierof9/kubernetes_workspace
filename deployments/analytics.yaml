@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: coworking
-        image: 844420410082.dkr.ecr.us-east-1.amazonaws.com/coworking-analytics:11
+        image: 844420410082.dkr.ecr.us-east-1.amazonaws.com/coworking-analytics:25
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -46,13 +46,13 @@ spec:
           timeoutSeconds: 5
         env:
         - name: DB_HOST
-          value: postgresql-service
+          value: postgresql-service.default.svc.cluster.local
         - name: DB_PORT
-          value: $DB_PORT
+          value: "5432"
         - name: DB_USERNAME
-          value: $DB_USERNAME
+          value: postgres_piero
         - name: DB_PASSWORD
-          value: $DB_PASSWORD
+          value: WI0FvuyPQD
         - name: DB_NAME
-          value: $DB_NAME
+          value: mydatabase
       restartPolicy: Always

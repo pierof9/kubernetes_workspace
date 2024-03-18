@@ -52,11 +52,11 @@ spec:
         image: postgres:latest
         env:
         - name: POSTGRES_DB
-          value: "..."
+          value: mydatabase
         - name: POSTGRES_USER
-          value: "..."
+          value: postgres_piero
         - name: POSTGRES_PASSWORD
-          value: "..."
+          value: WI0FvuyPQD
         ports:
         - containerPort: 5432
         volumeMounts:
