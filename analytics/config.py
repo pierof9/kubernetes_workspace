@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db_username = os.environ.get("DB_USERNAME", "postgres_piero")
 db_password = os.environ.get("DB_PASSWORD")
-db_host = os.environ.get("DB_HOST", "postgresql-service.default.svc.cluster.local")
+db_host = os.environ.get("DB_HOST")
 db_port = os.environ.get("DB_PORT", "5432")
 db_name = os.environ.get("DB_NAME", "mydatabase")
 
