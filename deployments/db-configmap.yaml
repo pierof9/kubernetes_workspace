@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  DB_USERNAME: "postgres_piero"
+  DB_NAME: "mydatabase"
+  DB_HOST: "postgresql-service.default.svc.cluster.local"
+  DB_PORT: "5432"
+metadata:
+  name: db-env
